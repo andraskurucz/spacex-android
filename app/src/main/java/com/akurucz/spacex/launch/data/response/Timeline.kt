@@ -1,4 +1,4 @@
-package com.akurucz.spacex.launch.data
+package com.akurucz.spacex.launch.data.response
 
 import com.squareup.moshi.Json
 

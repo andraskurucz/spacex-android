@@ -1,5 +1,6 @@
 package com.akurucz.spacex.launch.data
 
+import com.akurucz.spacex.launch.data.response.LaunchesResponseItem
 import retrofit2.http.GET
 import retrofit2.http.Query
 

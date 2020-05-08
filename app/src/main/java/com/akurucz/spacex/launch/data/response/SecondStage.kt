@@ -1,4 +1,4 @@
-package com.akurucz.spacex.launch.data
+package com.akurucz.spacex.launch.data.response
 
 data class SecondStage(
     val block: Int?,
