@@ -20,7 +20,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url 'https://androidx-dev-prod.appspot.com/snapshots/builds/6295087/artifacts/repository' } //TODO remove it when the PagingSource makes it to a release
     }
 }
 

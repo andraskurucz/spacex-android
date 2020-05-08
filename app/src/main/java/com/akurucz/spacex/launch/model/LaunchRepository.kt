@@ -1,7 +1,8 @@
 package com.akurucz.spacex.launch.model
 
-import com.akurucz.spacex.launch.model.Launch
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
 
 interface LaunchRepository {
-    suspend fun getLaunches(): List<Launch>
+    fun getLaunchStream(): Flow<PagingData<Launch>>
 }
