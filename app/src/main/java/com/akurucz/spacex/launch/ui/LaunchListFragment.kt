@@ -25,11 +25,18 @@ class LaunchListFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: LaunchViewModelFactory
     private lateinit var viewModel: LaunchViewModel
+    private val adapter = LaunchRecyclerViewAdapter(::onItemClicked)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         App.appComponent.inject(this)
+        viewModel = viewModelFactory.create(LaunchViewModel::class.java)
+
+        lifecycleScope.launch {
+            viewModel.getStream().collect {
+                adapter.presentData(it)
+            }
+        }
     }
 
     override fun onCreateView(
@@ -43,21 +50,12 @@ class LaunchListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = LaunchRecyclerViewAdapter(::onItemClicked)
         view.list.adapter = adapter.withLoadStateHeaderAndFooter(
             header = LoadStateAdapter { adapter.retry() },
             footer = LoadStateAdapter { adapter.retry() }
         )
         val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         view.list.addItemDecoration(decoration)
-
-        viewModel = viewModelFactory.create(LaunchViewModel::class.java)
-
-        lifecycleScope.launch {
-            viewModel.getStream().collect {
-                adapter.presentData(it)
-            }
-        }
     }
 
     private fun onItemClicked(item: Launch) {
