@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
 import com.akurucz.spacex.App
 import com.akurucz.spacex.R
 import com.akurucz.spacex.launch.model.Launch
@@ -24,7 +25,7 @@ class LaunchListFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: LaunchViewModelFactory
-    lateinit var viewModel: LaunchViewModel
+    private lateinit var viewModel: LaunchViewModel
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -45,7 +46,6 @@ class LaunchListFragment : Fragment() {
 
         val adapter = LaunchRecyclerViewAdapter(::onItemClicked)
         view.list.adapter = adapter
-        view.list.layoutManager = LinearLayoutManager(context)
         val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         view.list.addItemDecoration(decoration)
 
@@ -59,5 +59,10 @@ class LaunchListFragment : Fragment() {
     }
 
     private fun onItemClicked(item: Launch) {
+        findNavController().navigate(
+            LaunchListFragmentDirections.actionLaunchListFragmentToLaunchDetailFragment(
+                item
+            )
+        )
     }
 }

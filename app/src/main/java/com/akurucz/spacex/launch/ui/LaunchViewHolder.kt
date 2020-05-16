@@ -10,9 +10,10 @@ import kotlinx.android.synthetic.main.launch_item.view.*
 
 class LaunchViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(launch: Launch) {
+    fun bind(launch: Launch, onItemClicked: (Launch) -> Unit) {
         view.item_number.text = launch.missionName
         view.content.text = launch.rocketName
+        view.setOnClickListener { onItemClicked(launch) }
     }
 
     companion object {

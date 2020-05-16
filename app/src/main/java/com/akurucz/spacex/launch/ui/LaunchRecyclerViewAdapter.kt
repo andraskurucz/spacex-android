@@ -14,7 +14,7 @@ class LaunchRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {
-        getItem(position)?.let(holder::bind)
+        getItem(position)?.let { holder.bind(it, onItemClicked)}
     }
 
     companion object {
