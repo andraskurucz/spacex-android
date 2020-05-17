@@ -54,6 +54,7 @@ class LaunchListFragment : Fragment() {
             header = LoadStateAdapter { adapter.retry() },
             footer = LoadStateAdapter { adapter.retry() }
         )
+
         val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         view.list.addItemDecoration(decoration)
     }

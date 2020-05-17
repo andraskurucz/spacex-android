@@ -6,7 +6,7 @@ data class OrbitParams(
     val eccentricity: Double?,
     val epoch: String?,
     val inclination_deg: Any,
-    val lifespan_years: Int?,
+    val lifespan_years: Any,
     val longitude: Any,
     val mean_anomaly: Any,
     val mean_motion: Any,
