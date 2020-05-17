@@ -15,8 +15,4 @@ class LaunchViewModel @Inject constructor(private val repository: LaunchReposito
     private var currentLaunches: Flow<PagingData<Launch>>? = null
 
     val launchesStream: Flow<PagingData<Launch>> by lazy { repository.getLaunchStream().cachedIn(viewModelScope) }
-
-    fun getStream(): Flow<PagingData<Launch>> {
-        return repository.getLaunchStream().cachedIn(viewModelScope)
-    }
 }

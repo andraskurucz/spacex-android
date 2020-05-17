@@ -1,11 +1,11 @@
 package com.akurucz.spacex.launch.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -27,13 +27,13 @@ class LaunchListFragment : Fragment() {
     private lateinit var viewModel: LaunchViewModel
     private val adapter = LaunchRecyclerViewAdapter(::onItemClicked)
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         App.appComponent.inject(this)
-        viewModel = viewModelFactory.create(LaunchViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(LaunchViewModel::class.java)
 
         lifecycleScope.launch {
-            viewModel.getStream().collect {
+            viewModel.launchesStream.collect {
                 adapter.presentData(it)
             }
         }
