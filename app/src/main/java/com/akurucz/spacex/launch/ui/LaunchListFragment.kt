@@ -34,7 +34,7 @@ class LaunchListFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.launchesStream.collect {
-                adapter.presentData(it)
+                adapter.submitData(it)
             }
         }
     }

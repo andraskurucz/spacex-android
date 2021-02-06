@@ -5,6 +5,7 @@ import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
@@ -24,6 +25,7 @@ class NetworkModule {
             .connectTimeout(CONNECT_TIME_OUT_SEC.toLong(), TimeUnit.SECONDS)
             .writeTimeout(WRITE_TIME_OUT_SEC.toLong(), TimeUnit.SECONDS)
             .readTimeout(READ_TIME_OUT_SEC.toLong(), TimeUnit.SECONDS)
+            .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
             .build()
     }
 
