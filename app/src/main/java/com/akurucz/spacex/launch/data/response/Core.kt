@@ -10,5 +10,5 @@ data class Core(
     val landing_type: String?,
     val landing_vehicle: String?,
     val legs: Boolean?,
-    val reused: Boolean
+    val reused: Boolean?
 )
