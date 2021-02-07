@@ -3,26 +3,41 @@ package com.akurucz.spacex.launch.ui
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.akurucz.spacex.R
 import com.akurucz.spacex.launch.model.Launch
 
 class LaunchRecyclerViewAdapter(
     private val onItemClicked: (Launch) -> Unit
-) : PagingDataAdapter<Launch, LaunchViewHolder>(LAUNCH_COMPARATOR) {
+) : PagingDataAdapter<ListItem, RecyclerView.ViewHolder>(LAUNCH_COMPARATOR) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LaunchViewHolder {
-        return LaunchViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == R.layout.launch_item) LaunchViewHolder.create(parent)
+        else SeparatorViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: LaunchViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it, onItemClicked)}
+    override fun getItemViewType(position: Int): Int {
+        return when(getItem(position)) {
+            is ListItem.LaunchItem -> R.layout.launch_item
+            is ListItem.Separator -> R.layout.separator_item
+            else -> throw UnsupportedOperationException("Unknown view type")
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (val item = getItem(position)) {
+            is ListItem.LaunchItem -> (holder as LaunchViewHolder).bind(item.launch, onItemClicked)
+            is ListItem.Separator -> (holder as SeparatorViewHolder).bind(item.year)
+
+        }
     }
 
     companion object {
-        private val LAUNCH_COMPARATOR = object : DiffUtil.ItemCallback<Launch>() {
-            override fun areItemsTheSame(oldItem: Launch, newItem: Launch): Boolean =
+        private val LAUNCH_COMPARATOR = object : DiffUtil.ItemCallback<ListItem>() {
+            override fun areItemsTheSame(oldItem: ListItem, newItem: ListItem): Boolean =
                 oldItem == newItem
 
-            override fun areContentsTheSame(oldItem: Launch, newItem: Launch): Boolean =
+            override fun areContentsTheSame(oldItem: ListItem, newItem: ListItem): Boolean =
                 oldItem == newItem
         }
     }

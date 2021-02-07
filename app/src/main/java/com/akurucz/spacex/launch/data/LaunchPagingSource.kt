@@ -18,14 +18,18 @@ class LaunchPagingSource @Inject constructor(private val service: SpaceXService)
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Launch> {
         val currentPage = params.key ?: START_PAGE_INDEX
-        val offset = when(currentPage) {
+        val offset = when (currentPage) {
             START_PAGE_INDEX -> 0
             else -> config.initialLoadSize + (currentPage - 1) * config.pageSize
         }
 
         return try {
             val launches = service.getLaunches(limit = params.loadSize, offset = offset).map {
-                Launch(missionName = it.mission_name, rocketName = it.rocket.rocket_name)
+                Launch(
+                    missionName = it.mission_name,
+                    rocketName = it.rocket.rocket_name,
+                    launchYear = Integer.parseInt(it.launch_year)
+                )
             }
 
             LoadResult.Page(

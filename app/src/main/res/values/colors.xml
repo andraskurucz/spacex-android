@@ -8,4 +8,6 @@
 
     <color name="colorSurface">#FFF</color>
     <color name="colorControlHighlight">@color/colorAccent</color>
+
+    <color name="separatorBackground">#AAA</color>
 </resources>
