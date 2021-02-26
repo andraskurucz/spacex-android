@@ -1,0 +1,19 @@
+version: 2.1
+
+orbs:
+  android: circleci/android@0.2.1
+
+jobs:
+  build:
+    executor: android/android
+
+    steps:
+      - checkout
+      - run:
+          name: "Assembles and tests this project."
+          command: ./gradlew build
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - store_test_results:
+          path: app/build/test-results
