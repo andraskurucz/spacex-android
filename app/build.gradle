@@ -28,6 +28,16 @@ android {
         animationsDisabled = true
 
         execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        failureRetention {
+            // Enables the feature
+            enable true
+            // The number of snapshots to take during a test run. When not
+            // specified, the default value is 2. After reaching the max number
+            // of snapshots, subsequent assertion failures in a test run do not
+            // generate additional snapshots.
+            maxSnapshots 5
+            compressSnapshots false
+        }
     }
 
     buildTypes {
