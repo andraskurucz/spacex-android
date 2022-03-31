@@ -5,23 +5,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
-import com.akurucz.spacex.R
-import kotlinx.android.synthetic.main.load_item.view.*
+import com.akurucz.spacex.databinding.LoadItemBinding
 
-class LoadStateViewHolder(private val view: View, retry: () -> Unit) :
-    RecyclerView.ViewHolder(view) {
+class LoadStateViewHolder(private val binding: LoadItemBinding, retry: () -> Unit) :
+    RecyclerView.ViewHolder(binding.root) {
 
     init {
-        view.retry_button.setOnClickListener { retry() }
+        binding.retryButton.setOnClickListener { retry() }
     }
 
     fun bind(loadState: LoadState) {
         if (loadState is LoadState.Error) {
-            view.error_msg.text = loadState.error.localizedMessage
+            binding.errorMsg.text = loadState.error.localizedMessage
         }
-        view.progress_bar.visibility = toVisibility(loadState == LoadState.Loading)
-        view.retry_button.visibility = toVisibility(loadState != LoadState.Loading)
-        view.error_msg.visibility = toVisibility(loadState != LoadState.Loading)
+        binding.progressBar.visibility = toVisibility(loadState == LoadState.Loading)
+        binding.retryButton.visibility = toVisibility(loadState != LoadState.Loading)
+        binding.errorMsg.visibility = toVisibility(loadState != LoadState.Loading)
     }
 
     private fun toVisibility(constraint: Boolean): Int = if (constraint) {
@@ -32,8 +31,14 @@ class LoadStateViewHolder(private val view: View, retry: () -> Unit) :
 
     companion object {
         fun create(parent: ViewGroup, retry: () -> Unit): LoadStateViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.load_item, parent, false)
-            return LoadStateViewHolder(view, retry)
+            return LoadStateViewHolder(
+                binding = LoadItemBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                ),
+                retry = retry
+            )
         }
     }
 }

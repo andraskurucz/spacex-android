@@ -28,7 +28,7 @@ class LaunchRecyclerViewAdapter(
         when (val item = getItem(position)) {
             is ListItem.LaunchItem -> (holder as LaunchViewHolder).bind(item.launch, onItemClicked)
             is ListItem.Separator -> (holder as SeparatorViewHolder).bind(item.year)
-
+            else -> {}
         }
     }
 
