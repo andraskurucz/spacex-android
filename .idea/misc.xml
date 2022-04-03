@@ -8,6 +8,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/compose-model-1648982320070.xml" value="0.33" />
+        <entry key="../../../../layout/compose-model-1649008121214.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v23/splash_window.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
@@ -16,6 +19,8 @@
         <entry key="app/src/main/res/drawable/list_item_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/splash_window.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_launch_detail.xml" value="0.18703703703703703" />
+        <entry key="app/src/main/res/layout/fragment_launch_list.xml" value="0.42864583333333334" />
+        <entry key="app/src/main/res/layout/launch_item.xml" value="0.42864583333333334" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>

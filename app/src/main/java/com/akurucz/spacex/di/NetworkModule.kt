@@ -4,12 +4,15 @@ import com.akurucz.spacex.launch.data.SpaceXService
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
+@InstallIn(SingletonComponent::class)
 @Module
 class NetworkModule {
 
